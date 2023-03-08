@@ -126,7 +126,7 @@ const Login = () => {
               <div id="back">
               <div id="loginbox">
                 <div className="bx1">
-                <label htmlFor="Regno">Regno</label><br /><br />
+                <label htmlFor="Regno">Regnos</label><br /><br />
                 <label htmlFor="Password">Password</label>
                 </div>
                 <div className="bx2">
