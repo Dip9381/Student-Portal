@@ -3,6 +3,12 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 let leave_info = new Schema({
+  reg_no:{
+    type: String
+  },
+  Name:{
+    type: String
+  },
   start_date: {
     type: String
   },

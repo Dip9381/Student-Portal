@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-let detail = new Schema({
+let details = new Schema({
   name: {
     type: String
   },
@@ -11,4 +11,4 @@ let detail = new Schema({
   }
 });
 
-module.exports = mongoose.model("detail", detail);
+module.exports = mongoose.model("details", details);

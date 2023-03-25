@@ -1,14 +1,38 @@
-import React, { useState } from "react";
+import React, {  useEffect, useState } from "react";
 import image from "./profile_pic.jpg"
 import axios from "../axios";
+import Userdata from './userdata.js'
 
 const Body = () => {
+  let user="20bps1142";
   const [leave_detail,setleave_detail]=useState({
+    reg_no:"",
+    Name:"",
     start_date:"",
     end_date:"",
     reason:"",
     reason_Desp:""
-  })
+  });
+  const [attendances,setattendances]=useState([]);
+  
+  const attendance=async(e)=>{
+  
+    document.getElementById('atten_table').style.display="block";
+    const fetchdata=async()=>{
+      await axios.get('/getattendance',{params:{Subject1:'Java',Subject2:'Maths'}})
+      .then(result =>{
+        setattendances(dat=>{
+          dat=[];
+          return [...dat,result.data];
+        });
+        
+      })
+      .catch(err =>{
+        console.log(err);
+      })
+    }
+    fetchdata();
+  }
   const handleevent=async(e)=>{
     e.preventDefault();
     fetch('http://localhost:4000/leave_info',
@@ -19,15 +43,14 @@ const Body = () => {
   }
   }
     )
-    // await axios.post('/leave_info',leave_detail).then((result)=>{
-    //   console.log("data passed");
-    // }).catch((err)=>{
-    //   console.log(err);
-    // })
+    
     console.log(leave_detail);
   }
   const change=(e)=>{
-    setleave_detail({...leave_detail,[e.target.name]:e.target.value});
+    // setleave_detail({...leave_detail,);
+    // setleave_detail({...leave_detail,});
+    setleave_detail({...leave_detail,[e.target.name]:e.target.value,reg_no:document.getElementById('sregno').innerText,Name:document.getElementById('sname').innerText});
+    // console.log(typeof e.target.value);
   }
   return (
     <div id="body">
@@ -256,10 +279,10 @@ const Body = () => {
       </div>
       <div id="leave_request">
         <form onSubmit={handleevent}>
-          <div>Dipansu Rout</div><br />
-          <div>20bps1142</div><br />
-          <span>From :<input type="date" name="start_date" onChange={change}/></span>&nbsp;&nbsp;<span>To :<input type="date" name="end_date" onChange={change}/></span><br /><br />
-          <select name="reason" id="reason" onChange={change}>
+          <div id="sname">Dipansu Rout</div><br />
+          <div id="sregno">20bps1142</div><br />
+          <span>From :<input type="date" name="start_date" onChange={change} required/></span>&nbsp;&nbsp;<span>To :<input type="date" name="end_date" onChange={change} required/></span><br /><br />
+          <select name="reason" id="reason" onChange={change} required>
             <option value="">----Choose Your Reason----</option>
             <option value="Home visit">Home visit</option>
             <option value="Medical Issue">Medical Issue</option>
@@ -271,10 +294,30 @@ const Body = () => {
           </div>
           <div className="bx4">
             {/* <input type="text" name="reason_Desp" id="reason_Desp" /> */}
-            <textarea name="reason_Desp" id="reason_Desp" cols="30" rows="10" onChange={change}></textarea>
+            <textarea name="reason_Desp" id="reason_Desp" cols="30" rows="10" onChange={change} required></textarea>
           </div>
           <input type="submit" value="submit" />
         </form>
+      </div>
+      <div id="attendance">
+        <button onClick={attendance}>click</button>
+        <div id="block">
+          <table id="atten_table" >
+            <tbody>
+            <tr>
+              <th>course name</th>
+              <th>course code</th>
+              <th>faculty name</th>
+              <th>Present</th>
+              <th>Total</th>
+            </tr>
+            <Userdata attendances={attendances} user={user}/>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div className="proctorinfo">
+
       </div>
     </div>
   );

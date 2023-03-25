@@ -194,11 +194,14 @@ height: 100%;
 .main1 th{
   background-color: rgb(161, 161, 161);
 }
-table,th,td{
+.main table,.main th,.main td{
   padding: 20px;
   /* border-color: black; */
-  border-collapse: collapse;
+ border: 1px solid black;
   text-align: center;
+}
+.main,.main1{
+  border-collapse: collapse;
 }
 
 /* This is for login */
@@ -279,7 +282,22 @@ body{
   display: none;
 }
 
-      
-    /* <Routes>
-      <Route exact path="/" element={<Navbar />}></Route>
-    </Routes> */
+/* THis is for attendance */
+#attendance{
+  display: none;
+  width: 100%;
+}
+#block{
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#atten_table{
+  display: none;
+  border-collapse: collapse;
+  width: 400px;
+}
+ #atten_table table,#atten_table th,#atten_table td{
+  border: 1px solid black; 
+  width: 100%;
+}

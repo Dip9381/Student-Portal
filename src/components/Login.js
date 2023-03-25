@@ -15,12 +15,36 @@ const Login = () => {
   const [cpass,setcpass]=useState(-1);
   // const navigate=useNavigate();
   useEffect(()=>{
+    // let id="20bps1142";
     const fetchdata=async()=>{
-      const data1=await axios.get("/getauthenticate");
-      setcpass(data1.data.pin);
+// e.preventDefault();
+      // const options={
+      //   method:'GET',
+      //   url:'/getauthenticate',
+      //   params:{
+      //     id:'1'
+      //   }
+        
+      // }
+      await axios.get('/getauthenticate',{params:{id:"1"}})
+      .then((result) =>{
+        // console.log(result.data[0].name);
+        setcpass(result.data[0].pin);
+      }).catch((err)=>{
+        console.log(err);
+      })
+      ;
+      // const data1=await axios.get("/getauthenticate?reg="+params.id).
+      // then(result =>{
+      //   // console.log(result);
+      // })
+      // ;
+      // const res=await fetch("https://localhost:4000/getauthenticate");
+      // console.log(res.json());
+      // setcpass(data1.data[0].pin);
       // setpass(data1.data.pass);
       // setdata(data1);
-      // console.log(data1.data.pass);
+      // console.log(data1);
     };
     fetchdata();
   },[])
