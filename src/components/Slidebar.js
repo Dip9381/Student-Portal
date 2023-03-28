@@ -49,6 +49,15 @@ document.getElementById('profile').style.display="block";
     }
     document.getElementById('attendance').style.display="block";
   }
+  function changepass(){
+    let n=document.getElementById('body').childElementCount;
+  let body=document.getElementById('body');
+    for(let i=0;i<n;i++){
+      if(body.children[i].id!=='passchange')
+      body.children[i].style.display="none";
+    }
+    document.getElementById('passchange').style.display="block";
+  }
   function showcontent(){
     
   }
@@ -63,7 +72,7 @@ document.getElementById('profile').style.display="block";
       <div className="content LeaveRequest"><button onClick={showleave}>Leave Request</button></div>
       <div className="content"><button onClick={showcontent}>Proctor Info</button></div>
       <div className="content"><button onClick={showcontent}>Payment</button></div>
-      <div className="content"><button onClick={showcontent}>Change Password</button></div>
+      <div className="content"><button onClick={changepass}>Change Password</button></div>
     </div>
 </>
 )

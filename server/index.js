@@ -1,5 +1,6 @@
 const express = require("express");
 const app = express();
+app.timeout=10000;
 const cors = require("cors");
 const PORT = 4000;
 const mongoose = require("mongoose");
@@ -8,6 +9,7 @@ let detail=require("./authenticate");
 const leave_info=require("./leave_info");
 let atten=require("./attendance");
 
+let mark=require("./marks");
 
 app.use(cors());
 
@@ -26,52 +28,65 @@ app.listen(PORT, function() {
 });
 
 const router = express.Router();
-app.use("/", router);
-// router.route("/getauthenticate").get(function(req, res) {
-//     detail.find({name:"20bps1142"})
-//   .then(result => {
-//     res.send(result);
-//     console.log(req);
-//   })
-//   .catch(err => {
-//     res.send(err);
-//   });
-//   });
 
-  app.get('/getauthenticate',(req,res)=>{
-    // console.log(req.query);
-    detail.find({name:"20bps1142"})
-    .then(result => {
-      res.send(result);
-  })
-  .catch(err => {
-    res.send(err);
-  });
-  })
-  app.get('/getattendance',(req,res)=>{
-    // console.log(req.query.Subject1);
-    // console.log(res);
-    let sub1=req.query.Subject1;
-    let sub2=req.query.Subject2;
-    atten.find({"reg_no.reg":"20bps1142"})
-    .then(result =>{
-      
-      res.send(result);
-      // console.log(result);
+
+
+
+app.use(express.json());
+ app.post('/getauthenticate',async (req,res)=>{
+    const {regno,password}=req.body;
+    await detail.find({reg_no:regno})
+    .then((result)=>{
+      console.log((typeof result[0])==="undefined");
+      if((typeof result[0])==="undefined")
+      res.json("notexist");
+      else if(result[0].pin==password)
+      res.json("exist");
+      else
+      res.json("notexist");
+
+    })
+    .catch((err)=>{
+      console.log(err);
     })
   })
 
+app.use(express.json());
+app.post('/changepass',async(req,res)=>{
+  const {cpass,npass,reg}=req.body;
+  await detail.find({reg_no:reg,pin:cpass})
+  .then(async (result)=>{
+    if(typeof result[0]!=="undefined"){
+      await detail.findOneAndUpdate({reg_no:reg},{pin:npass},{new:true});
+      res.json("changed");
+    }
+    else{
+      res.json("notexist");
+    }
+  })
+})
 
-app.use("/",router);
-// app.route("/getattendance").get(function(req,res){
-//   atten.find({Subject:"Java"}).then(result =>{
-//     res.send(result[0]);
-//     console.log(result[0].reg_no['20bps1142']['present']);
-//   })
-//   .catch(err =>{
-//     res.end(err);
-//   })
-// })
+
+app.use('/',router);
+app.get('/getmarks',async (req,res)=>{
+  let id=req.query.id;
+  // console.log(req.query);
+  await mark.find({student_id:id})
+  .then((result)=>{
+    res.send(result);
+  })
+})
+
+  app.use("/", router);
+  app.get('/getattendance',(req,res)=>{
+        let sub1=req.query.Subject1;
+    let sub2=req.query.Subject2;
+    atten.find({"reg_no.reg":"20bps1142"})
+    .then(result =>{
+      res.send(result);
+    })
+  })
+
   app.use(express.json())
  app.post("/leave_info",(req,res)=>{
     const data=new leave_info({
@@ -85,6 +100,4 @@ app.use("/",router);
       data.save().then((doc)=>{
         console.log(doc);
       }).catch((err)=>console.log(err));
-    // res.json(val);
-    // console.log(req);
   })

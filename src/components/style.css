@@ -172,37 +172,7 @@ height: 100%;
   padding-bottom: 10px;
 }
 
-#marks_details{
-  padding-top: 30px;
-   display:flex;
-   width:90%;
-   margin-left:auto;
-   margin-right:auto;
-   /* background-color: red; */
-}
-#marks{
-    display: none;
-}
-#head1 th{
-  background-color: var(--blue);
-  color: white;
-}
-#main{
-  width: 100%;
-  background-color: white;
-}
-.main1 th{
-  background-color: rgb(161, 161, 161);
-}
-.main table,.main th,.main td{
-  padding: 20px;
-  /* border-color: black; */
- border: 1px solid black;
-  text-align: center;
-}
-.main,.main1{
-  border-collapse: collapse;
-}
+
 
 /* This is for login */
 .loginpage{
@@ -237,10 +207,6 @@ body{
   margin-left: 2em;
   margin-right: 2em;
   margin-top: 5em;
-}
-
-.bx3,.bx4{
-
 }
 #reason_Desp{
   width: 70%;
@@ -293,11 +259,13 @@ body{
   margin-right: auto;
 }
 #atten_table{
-  display: none;
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
   border-collapse: collapse;
-  width: 400px;
 }
- #atten_table table,#atten_table th,#atten_table td{
+#atten_table table,#atten_table th,#atten_table td{
   border: 1px solid black; 
-  width: 100%;
+  padding: 20px;
+  /* width: 50%; */
 }

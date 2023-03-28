@@ -1,11 +1,34 @@
 import React, { useState } from "react";
 import "./style.css";
 import home from "./home.png"
+import axios from '../axios';
+import { useNavigate } from "react-router-dom";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const [but, setbut] = useState(false);
   const [dash, setdash] = useState(false);
   // const sliderref=useRef(null);
+  const history=useNavigate();
+async function logout(e){
+  e.preventDefault();
+  history("/");
+  // await axios({
+  //   method: 'post',
+  //   url: 'http://localhost:4000/getauthenticate',
+  //   data: {
+  //       regno:"nil",password:"nil"
+  //   }
+  // }).then((response) => {
+  //   if(response.data==="notexist"){
+  //       history("/")
+  //       alert("You have been logged out");
+  //   }
+  // })
+  // .catch((err) => {
+  //   console.log(err);
+  // });
+}
+
   function showdefault(){
     let n=document.getElementById('body').childElementCount;
   let body=document.getElementById('body');
@@ -56,7 +79,7 @@ const Navbar = (props) => {
             <div className="dropdown-menu" id="dropdownMenu">
               <div>Hello Dipansu Rout</div>
               <hr />
-              <button type="button" id="logout" onClick={()=>props.logout("logout")}>Logout</button>
+              <button type="button" id="logout" onClick={logout}>Logout</button>
             </div>
           </div>
         </div>

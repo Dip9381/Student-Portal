@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Login from "./components/Login.js"
 
 function App() {
+  useEffect(()=>{
+    if(window.location.pathname==='/')
+    window.localStorage.setItem("auth","false");
+  })
   return (
     <div className="loginpage">
       <Login />

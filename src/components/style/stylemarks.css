@@ -1,0 +1,30 @@
+#marks_details{
+    padding-top: 30px;
+     display:flex;
+     width:90%;
+     margin-left:auto;
+     margin-right:auto;
+     /* background-color: red; */
+  }
+  #marks{
+    display: none;
+  }
+  #head1 th{
+  background-color: var(--blue);
+  color: white;
+  }
+  #main{
+  width: 100%;
+  background-color: white;
+  }
+  .main1 th{
+  background-color: rgb(161, 161, 161);
+  }
+#main table,#main th,#main td,#main1 table,#main1 th,#main1 td{
+  padding: 20px;
+  /* border-color: black; */
+  border: 1px solid black;
+  text-align: center;
+  border-collapse: collapse;
+  }
+  
