@@ -269,3 +269,7 @@ body{
   padding: 20px;
   /* width: 50%; */
 }
+
+#receipts{
+  display: none;
+}

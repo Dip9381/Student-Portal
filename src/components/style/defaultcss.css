@@ -1,0 +1,21 @@
+#default{
+    display: flex;
+}
+.card{
+    border: 1px black solid;
+    width: 23%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-top: 5%;
+    border-radius: 10px;
+    box-shadow: inset rgb(144, 144, 240) 100px 100px 200px -40px;
+    padding: 10px;
+    /* transition: transform 1s ease-in; */
+}
+.card:hover{
+    /* transform: rotate(y 360deg); */
+    rotate: y 180deg;
+}
+.liststyle{
+    list-style:none;
+}

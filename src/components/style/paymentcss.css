@@ -1,0 +1,11 @@
+#payments{
+    display: none;
+    width: 60%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
+}
+#payments table,#payments td,#payments th{
+    border-collapse: collapse;
+    padding: 20px;
+}

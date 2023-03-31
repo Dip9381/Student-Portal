@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./style.css";
 import home from "./home.png"
-import axios from '../axios';
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -12,21 +11,6 @@ const Navbar = () => {
 async function logout(e){
   e.preventDefault();
   history("/");
-  // await axios({
-  //   method: 'post',
-  //   url: 'http://localhost:4000/getauthenticate',
-  //   data: {
-  //       regno:"nil",password:"nil"
-  //   }
-  // }).then((response) => {
-  //   if(response.data==="notexist"){
-  //       history("/")
-  //       alert("You have been logged out");
-  //   }
-  // })
-  // .catch((err) => {
-  //   console.log(err);
-  // });
 }
 
   function showdefault(){
@@ -66,7 +50,7 @@ async function logout(e){
           ...
         </button>
         <div>
-        <a className="navele" href="#" onClick={showdefault}>
+        <a className="navele" href="" onClick={showdefault}>
           <img src={home} width={"40px"} alt="" /> Home
         </a>
         </div>

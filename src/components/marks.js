@@ -5,22 +5,32 @@ import Marksdata from './Marksdata.js'
 
 
 const Marks =  () => {
+  const [user,setuser]=useState("");
+  useEffect(()=>{
+    setuser((df)=>{
+      df="";
+      df=localStorage.getItem("regno");
+      // console.log(df);
+      return df;
+    })
+  })
+  // console.log(user);
   const [marks,setmarks]=useState([]);
   useEffect(()=>{
     // const  loadmarks= async()=>{
-      axios.get('/getmarks',{params:{id:'20bps1142'}})
+      axios.get('/getmarks',{params:{user}})
      .then(result=>{
        setmarks(df=>{
          df=[];
          return [...df,result.data[0]];
        },[])
-       console.log(result.data[0].courses[0].course_code);
+      //  console.log(result.data[0].courses[0].course_code);
      })
      .catch(err=>{
        console.log(err);
      })
     // }
-  },[])
+  })
   return (
     <div id="marks">
     <div id="marks_details">

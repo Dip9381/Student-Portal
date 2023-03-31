@@ -3,12 +3,20 @@ import Userdata from './userdata.js'
 import axios from "../axios";
 
 const Attendance = () => {
-    let user="20bps1142";
+    // let user="20bps1142";
+    const [user,setuser]=useState("");
+    useEffect(()=>{
+      setuser((df)=>{
+        df="";
+        // console.log(localStorage.getItem("regno"));
+        return df=localStorage.getItem("regno");
+      })
+    })
   
   const [attendances,setattendances]=useState([]);
 
   useEffect(()=>{
-    axios.get('/getattendance',{params:{Subject1:'Java',Subject2:'Maths'}})
+    axios.get('/getattendance',{params:{user}})
       .then(result =>{
         setattendances(dat=>{
           dat=[];
@@ -19,26 +27,8 @@ const Attendance = () => {
       .catch(err =>{
         console.log(err);
       })
-  },[])
+  })
   
-  // const attendance=async(e)=>{
-  
-  //   document.getElementById('atten_table').style.display="block";
-  //   const fetchdata=async()=>{
-  //     await axios.get('/getattendance',{params:{Subject1:'Java',Subject2:'Maths'}})
-  //     .then(result =>{
-  //       setattendances(dat=>{
-  //         dat=[];
-  //         return [...dat,result.data];
-  //       });
-        
-  //     })
-  //     .catch(err =>{
-  //       console.log(err);
-  //     })
-  //   }
-  //   fetchdata();
-  // }
   
   return (
     <div id="attendance">

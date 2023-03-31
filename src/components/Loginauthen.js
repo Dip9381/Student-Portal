@@ -24,12 +24,14 @@ const Loginauthen = () => {
       }).then((response) => {
         if(response.data==="exist"){
           localStorage.setItem("auth","true");
+          localStorage.setItem("regno",regno);
             history("/loggedin/home")
             alert("welcome");
             console.log(response.data);
         }
         else{
           localStorage.setItem("auth","false");
+          localStorage.removeItem("regno");
           // window.location.reload();
           history("/");
         alert("wrong username or password");
