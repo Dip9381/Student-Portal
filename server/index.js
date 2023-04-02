@@ -1,16 +1,16 @@
 const express = require("express");
 const app = express();
-app.timeout=10000;
 const cors = require("cors");
 const PORT = 4000;
 const mongoose = require("mongoose");
 
-let detail=require("./authenticate");
+// let detail=require("./authenticate");
 const leave_info=require("./leave_info");
 let atten=require("./attendance");
 
 let payments=require("./payments");
 let receipts=require("./receipts");
+let details=require('./details');
 
 let mark=require("./marks");
 
@@ -38,7 +38,7 @@ const router = express.Router();
 app.use(express.json());
  app.post('/getauthenticate',async (req,res)=>{
     const {regno,password}=req.body;
-    await detail.find({reg_no:regno})
+    await details.find({reg_no:regno})
     .then((result)=>{
       // console.log((typeof result[0])==="undefined");
       if((typeof result[0])==="undefined")
@@ -80,6 +80,31 @@ app.get('/getmarks',async (req,res)=>{
   })
 })
 
+app.use('/',router);
+app.get('/getstudentmarks',async (req,res)=>{
+  let id=req.query.user;
+  // console.log(req.query);
+  await mark.find({'courses.faculty':"John Doe"},{
+    "courses.$":1,"student_id":1
+  })
+  .then((result)=>{
+    // const{...dat}=result.courses;
+    // console.log(result)
+    res.send(result);
+  })
+})
+
+app.use('/',router);
+app.get('/getdetails',async(req,res)=>{
+  details.find({reg_no:req.query.user})
+  .then(result=>{
+    res.send(result);
+  })
+  .catch(err=>{
+    console.log(err);
+  })
+})
+
   app.use("/", router);
   app.get('/getattendance',(req,res)=>{
     //     let sub1=req.query.Subject1;
@@ -92,26 +117,26 @@ app.get('/getmarks',async (req,res)=>{
     })
   })
 
-  app.use(express.json())
- app.post("/leave_info",(req,res)=>{
-    const data=new leave_info({
-      reg_no:req.body.reg_no,
-      Name:req.body.Name,
-      start_date:req.body.start_date,
-      end_date:req.body.end_date,
-      reason:req.body.reason,
-      reason_Desp:req.body.reason_Desp
-    });
-      data.save().then((doc)=>{
-        console.log(doc);
-      }).catch((err)=>console.log(err));
-  });
+  app.use("/",router);
+  app.get('/getqueries',(req,res)=>{
+    // console.log(req.query)
+    leave_info.find({reg_no:req.query.id})
+    .then((result)=>{
+      res.send(result);
+    })
+    .catch(err=>{
+      console.log(err);
+    })
+  
+  })
 
 app.use("/",router);
 app.get('/getpayments',(req,res)=>{
-  payments.find({reg_no:"20bps1142"})
+  console.log(req.query)
+  payments.find({reg_no:req.query.user})
   .then((result)=>{
     res.send(result);
+    console.log(result)
   })
   .catch(err=>{
     console.log(err);
@@ -120,7 +145,7 @@ app.get('/getpayments',(req,res)=>{
 })
 app.use("/",router);
 app.get('/getreceipts',(req,res)=>{
-  receipts.find({reg_no:"20bps1142"})
+  receipts.find({reg_no:req.query.user})
   .then((result)=>{
     res.send(result);
   })
@@ -145,34 +170,35 @@ app.get('/getreceipts',(req,res)=>{
           price_data:{
             currency:'inr',
             product_data:{
-              name:req.body.con.payment_for,
+              name:req.body.con.reciepts[0].payment_for,
             },
-            unit_amount:Number.parseInt(req.body.con.amount_to_be_paid)*100
+            unit_amount:Number.parseInt(req.body.con.reciepts[0].amount_to_be_paid)*100
           },
           quantity:1
         },
       ],
       mode: 'payment',
-      success_url: 'http://localhost:3000/checkoutsuccess?id='+req.body.con.receipt_number,
+      success_url: 'http://localhost:3000/checkoutsuccess?id='+req.body.con.reciepts[0].receipt_number,
       cancel_url: 'http://localhost:3000/loggedin/home',
     });
     res.send({url:session.url});
+    // console.log(r  eq.body.con.reciepts[0].receipt_number)
   });
 
   app.use('/',router);
   app.post('/updatepayments',(req,res)=>{
-    // console.log(req.body)
+    console.log(req.body)
     payments.find({ "reg_no":req.body.regno ,
     "reciepts.receipt_number": req.body.orderId},{"reciepts.$":1,"reg_no":1,"_id":0})
     .then((result)=>{
       // const data=new receipts(result[0]);
       // console.log(result[0]);
       receipts.insertMany(result[0]);
-    }).catch(err=>{
+      payments.deleteOne({reg_no:req.body.regno,"reciepts.receipt_number":req.body.orderId})
+    .then().catch(err=>{
       console.log(err);
     })
-    payments.updateOne({reg_no:req.body.regno},{"$pull":{reciepts:{receipt_number:req.body.orderId}}})
-    .then().catch(err=>{
+    }).catch(err=>{
       console.log(err);
     })
   })

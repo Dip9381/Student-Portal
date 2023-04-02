@@ -1,38 +1,44 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "../axios";
-import "./style.css";
+import axios from "../../axios";
+import "../style.css";
 const Loginauthen = () => {
+    // window.location.reload();
+    if(window.location.pathname==='/teacherlogin' && localStorage.getItem("teacherauth")==="true"){
+        console.log("working");
+        window.location.reload();
+      }
     const history=useNavigate();
-  const [regno, setregno] = useState("");
+  const [teacherid, setteacherid] = useState("");
   const [password, setpassword] = useState("");
 
-  if(window.location.pathname==='/' && localStorage.getItem("auth")==="true"){
+  if(window.location.pathname==='/teacherlogin' && localStorage.getItem("teacherauth")==="true"){
+    console.log("working");
     window.location.reload();
   }
 
   async function submit(e) {
-    localStorage.setItem("auth","false");
+    localStorage.setItem("teacherauth","false");
     e.preventDefault();
     await axios({
         method: 'post',
-        url: 'http://localhost:4000/getauthenticate',
+        url: 'http://localhost:4001/teachergetauthenticate',
         data: {
-            regno,password
+            teacherid,password
         }
       }).then((response) => {
         if(response.data==="exist"){
-          localStorage.setItem("auth","true");
-          localStorage.setItem("regno",regno);
-            history("/loggedin/home")
+          localStorage.setItem("teacherauth","true");
+          localStorage.setItem("teacherid",teacherid);
+            history("/teacherloggedin/home")
             alert("welcome");
             console.log(response.data);
         }
         else{
-          localStorage.setItem("auth","false");
-          localStorage.removeItem("regno");
+          localStorage.setItem("teacherauth","false");
+          localStorage.removeItem("teacherid");
           // window.location.reload();
-          history("/");
+          history("/teacherlogin");
         alert("wrong username or password");
         }
       })
@@ -47,13 +53,13 @@ const Loginauthen = () => {
         <div id="back">
           <div id="loginbox">
             <div className="bx1">
-              <label htmlFor="Regno">Regnos</label>
+              <label htmlFor="Regno">Teacher ID</label>
               <br />
               <br />
               <label htmlFor="Password">Password</label>
             </div>
             <div className="bx2">
-              <input type="text" id="Regno" onChange={(e)=>{setregno(e.target.value)}} required />
+              <input type="text" id="Regno" onChange={(e)=>{setteacherid(e.target.value)}} required />
               <br />
               <br />
               <input type="password" id="Password" onChange={(e)=>{setpassword(e.target.value)}} required />
@@ -65,7 +71,7 @@ const Loginauthen = () => {
           </div>
         </div>
       </form>
-      <button  style={{width:"200px",height:"70px",marginTop:"35%",marginLeft:"35%",borderRadius:"10px",backgroundColor:"lightgreen",fontSize:"25px",color:"white"}} onClick={()=>{history('/teacherlogin')}}>Teacher Sign In </button>
+      <button  style={{width:"200px",height:"70px",marginTop:"35%",marginLeft:"35%",borderRadius:"10px",backgroundColor:"lightgreen",fontSize:"25px",color:"white"}} onClick={()=>{history('/')}}>Student Sign In </button>
     </>
   );
 };

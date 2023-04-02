@@ -133,7 +133,7 @@ height: 100%;
 }
 #prof_details{
    display:flex;
-   width:65%;
+   width:75%;
    margin-left:auto;
    margin-right:auto;
    background-color: rgb(195, 247, 247);
@@ -147,7 +147,7 @@ height: 100%;
     display: none;
 }
 #prof_disp{
-  margin-right: 50px;
+  margin-right: 140px;
   font-size: 30px;
 }
 #prof_disp label{
@@ -170,6 +170,9 @@ height: 100%;
 #prof_detaildisp div{
   font-size: 30px;
   padding-bottom: 10px;
+}
+#prof_detaildisp{
+
 }
 
 
@@ -204,9 +207,20 @@ body{
   opacity: 0.9;
 }
 .bx1,.bx2{
-  margin-left: 2em;
-  margin-right: 2em;
-  margin-top: 5em;
+  margin-left: 1em;
+  margin-right: 1em;
+  margin-top: 4em;
+  font-size: 20px;
+}
+#submit{
+  width: 100px;
+  height: 40px;
+  font-size: 20px;
+  border-radius: 5px;
+  border: 1px solid;
+}
+#submit:hover{
+  background-color: lightgreen;
 }
 #reason_Desp{
   width: 70%;

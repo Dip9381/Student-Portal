@@ -1,5 +1,5 @@
 import axios from '../axios';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 const Pay = ({con}) => {
   async function checkout(e){
       // e.preventDefault();
@@ -7,8 +7,8 @@ const Pay = ({con}) => {
         method:'post',
         url:'http://localhost:4000/checkout-session',
         data:{
-          con,
-          regno:"20bps1142"
+          con
+          // regno:user
         }
       }).then((result)=>{
         if(result.data.url){

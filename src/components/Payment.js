@@ -1,44 +1,54 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './style/paymentcss.css'
 import axios from "../axios";
 import RecieptData from "./RecieptData.js"
 import Paymentdata from "./Paymentdata"
 
 const Payment = () => {
+    // const [user,setuser]=useState("");
+    // useEffect(()=>{
+    //   setuser((df)=>{
+    //     df="";
+    //     // console.log(localStorage.getItem("regno"));
+    //     df=localStorage.getItem("regno");
+    //     return df;
+    //   })})
     const [paymentdata,setpaymentdata]=useState([]);
     const [receiptdata,setreceiptdata]=useState([]);
     useState(()=>{
-        axios.get('/getpayments')
+        axios.get('http://localhost:4000/getpayments',
+        {params:{user:localStorage.getItem("regno")}}
+        )
         .then((result)=>{
-            // console.log(result.data[0].reciepts[0].receipt_number);
+            console.log(result.data);
             setpaymentdata(df=>{
                 df=[];
-                return [...df,result.data[0]];
+                return [...df,result.data];
             })
         }).catch(err=>{
             console.log(err);
         });
-        axios.get('/getreceipts')
+        axios.get('http://localhost:4000/getreceipts',{params:{user:localStorage.getItem("regno")}})
         .then((result)=>{
-            // console.log(result.data[0].reciepts[0].receipt_number);
+            // console.log(result.data[0]);
             setreceiptdata(df=>{
                 df=[];
-                return [...df,result.data[0]];
+                return [...df,result.data];
             })
         }).catch(err=>{
             console.log(err);
         });
-    },[])
+    })
 
   return (
     <>
     <div id='payments'>
         <table border={1}>
+            <caption style={{fontSize:"40px"}}><b>Payments</b></caption>
             <tbody>
                 <tr>
-                <th>Reciept Number</th>
+                <th>Payment Number</th>
                 <th>Payment Details</th>
-                <th>Reciept id</th>
                 <th>Amount to be paid</th>
                 <th>Amount in words</th>
                 </tr>
@@ -48,9 +58,10 @@ const Payment = () => {
     <br />
         <hr />
         <table border={1}>
+            <caption style={{fontSize:"40px"}}><b>Reciepts</b></caption>
             <tbody>
                 <tr>
-                <th>Reciept Number</th>
+                <th>Payment Number</th>
                 <th>Payment Details</th>
                 <th>Reciept id</th>
                 <th>Amount to be paid</th>

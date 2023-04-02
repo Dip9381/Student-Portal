@@ -13,6 +13,8 @@ const Loggedin = () => {
       console.log("running");
       history("/");
     }
+    else if(window.location.pathname==='/loggedin/home')
+    history('/loggedin/home')
   },[])
   return (
     <div className="scroll">

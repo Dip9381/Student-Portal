@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import './style/stylemarks.css'
-import axios from "../axios";
+// import '../style/stylemarks.css'
+import axios from "../../axios";
 import Marksdata from './Marksdata.js'
 
 
@@ -9,7 +9,7 @@ const Marks =  () => {
   useEffect(()=>{
     setuser((df)=>{
       df="";
-      df=localStorage.getItem("regno");
+      df=localStorage.getItem("teacherid");
       // console.log(df);
       return df;
     })
@@ -18,11 +18,12 @@ const Marks =  () => {
   const [marks,setmarks]=useState([]);
   useEffect(()=>{
     // const  loadmarks= async()=>{
-      axios.get('/getmarks',{params:{user}})
+      axios.get('http://localhost:4000/getstudentmarks',{params:{user}})
      .then(result=>{
+        // console.log(result.data);
        setmarks(df=>{
          df=[];
-         return [...df,result.data[0]];
+         return [...df,result.data];
        },[])
       //  console.log(result.data[0].courses[0].course_code);
      })
@@ -32,6 +33,11 @@ const Marks =  () => {
     // }
   })
   return (
+    // <></>
+    // <>
+    // <div>hello</div>
+    // </>
+    
     <div id="marks">
     <div id="marks_details">
     <div id="marks_details">
@@ -39,17 +45,14 @@ const Marks =  () => {
       <tbody>
       <tr id="head1">
         <th>Sl.No.</th>
-        <th>ClassNbr</th>
         <th>Course Code</th>
         <th>Course Title</th>
         <th>Course Type</th>
         <th>Course System</th>
-        <th>Faculty</th>
+        {/* <th>Registration Number</th> */}
         <th>Slot</th>
       </tr>
-      {
-        typeof marks.length!==0?<Marksdata marks={marks} count={0}/>:console.log("")
-      }
+      <Marksdata marks={marks} count={0}/>
       </tbody>
     </table>
   </div>

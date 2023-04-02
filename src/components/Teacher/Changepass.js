@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import './style/passchangestyle.css'
-import axios from "../axios";
+import '../style/passchangestyle.css'
+import axios from "../../axios";
 
 const Changepass = () => {
     const [cpass,setcpass]=useState("");
@@ -9,9 +9,9 @@ async function setpass(e){
 e.preventDefault();
 await axios({
     method:'post',
-    url:'http://localhost:4000/changepass',
+    url:'http://localhost:4001/changepass',
     data:{
-        cpass,npass,reg:"20bps1142"
+        cpass,npass,reg:"1111"
     }
 }).then((response)=>{
     if(response.data==="changed"){
@@ -27,10 +27,9 @@ await axios({
   return (
     <div id='passchange'>
         <form method="post">
-            Current Password: <input type="text" name="cpass" id="cpass" onChange={(e)=>{setcpass(e.target.value)}} /><br /> <br />
-            New Password: <input type="text" name="npass" id="npass" onChange={(e)=>{setnpass(e.target.value)}}/>
-            <br /><br />
-            <input id='but' type="button" value="change" onClick={setpass} />
+            Current Password: <input type="text" name="cpass" id="tcpass" onChange={(e)=>{setcpass(e.target.value)}} /><br />
+            New Password: <input type="text" name="npass" id="tnpass" onChange={(e)=>{setnpass(e.target.value)}}/>
+            <input type="button" value="change" onClick={setpass} />
         </form>
     </div>
   )

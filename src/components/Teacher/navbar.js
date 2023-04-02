@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "./style.css";
-import home from "./home.png"
+import "../style.css";
+import home from "../home.png"
 import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
@@ -10,7 +10,7 @@ const Navbar = () => {
   const history=useNavigate();
 async function logout(e){
   e.preventDefault();
-  history("/");
+  history("/teacherlogin");
 }
 
   function showdefault(){
@@ -50,7 +50,7 @@ async function logout(e){
           ...
         </button>
         <div>
-        <a className="navele" href="/loggedin/home" onClick={showdefault}>
+        <a className="navele" href="" onClick={showdefault}>
           <img src={home} width={"40px"} alt="" /> Home
         </a>
         </div>
@@ -61,7 +61,7 @@ async function logout(e){
               Dashboard
             </div>
             <div className="dropdown-menu" id="dropdownMenu">
-              <div>Hello  {localStorage.getItem("regno")}</div>
+              <div>Hello {localStorage.getItem("teacherid")}</div>
               <hr />
               <button type="button" id="logout" onClick={logout}>Logout</button>
             </div>

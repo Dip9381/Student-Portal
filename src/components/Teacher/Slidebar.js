@@ -1,5 +1,5 @@
 import React from 'react'
-import './style.css'
+import '../style.css'
 const Slidebar = () => {
   // const [di]
   window.onload=()=>{
@@ -58,14 +58,9 @@ document.getElementById('profile').style.display="block";
     }
     document.getElementById('passchange').style.display="block";
   }
-  function showpayment(){
-    let n=document.getElementById('body').childElementCount;
-  let body=document.getElementById('body');
-    for(let i=0;i<n;i++){
-      if(body.children[i].id!=='payments')
-      body.children[i].style.display="none";
-    }
-    document.getElementById('payments').style.display="block";
+  
+  function showcontent(){
+    
   }
   return (
     <>
@@ -74,7 +69,6 @@ document.getElementById('profile').style.display="block";
       <div className="content Marks"><button onClick={showmarks}>Marks</button></div>
       <div className="content Attendance"><button onClick={showattendance}>Attendance</button></div>
       <div className="content LeaveRequest"><button onClick={showleave}>Leave Request</button></div>
-      <div className="content"><button onClick={showpayment}>Payment</button></div>
       <div className="content"><button onClick={changepass}>Change Password</button></div>
     </div>
 </>

@@ -3,12 +3,10 @@ import Userdata from './userdata.js'
 import axios from "../axios";
 
 const Attendance = () => {
-    // let user="20bps1142";
     const [user,setuser]=useState("");
     useEffect(()=>{
       setuser((df)=>{
         df="";
-        // console.log(localStorage.getItem("regno"));
         return df=localStorage.getItem("regno");
       })
     })

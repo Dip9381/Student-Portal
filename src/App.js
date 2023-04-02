@@ -5,6 +5,8 @@ function App() {
   useEffect(()=>{
     if(window.location.pathname==='/')
     window.localStorage.setItem("auth","false");
+    if(window.location.pathname==='/teacherlogin')
+    window.localStorage.setItem("teacherauth","false");
   })
   return (
     <div className="loginpage">

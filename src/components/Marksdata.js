@@ -3,10 +3,12 @@ import Markshow from './Markshow.js';
 const Marksdata = ({marks,count}) => {
   return (
     <>
+     {/* { console.log(marks)} */}
     {
+      // console.log(typeof marks[0].data[0])
 
        typeof marks[0]!=="undefined"?(
-
+        // console.log("hello1")
         marks[0].courses.map(e=>{
             // {console.log(e)}
             // let student_id=marks[0].student_id;
@@ -48,7 +50,7 @@ const Marksdata = ({marks,count}) => {
         }) 
         
         
-        ):(console.log("delay handeled"))
+        ):(console.log(marks+"jj"))
         
     }
     </>

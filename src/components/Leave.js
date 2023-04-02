@@ -11,7 +11,7 @@ const Leave = () => {
       });
       const handleevent=async(e)=>{
         e.preventDefault();
-        fetch('http://localhost:4000/leave_info',
+        fetch('http://localhost:4001/leave_info',
         {method:'POST',
         body:JSON.stringify(leave_detail),
         headers: {

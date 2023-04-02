@@ -2,23 +2,23 @@ import React from 'react'
 
 
 const RecieptData = ({data}) => {
-    // console.log(typeof data[0]);
+    console.log(data);
     // console.log(data[0].reciepts);
   return (
     <>
     {
         (typeof data[0]!=="undefined")?(
             // console.log(data[0])
-            data[0].reciepts?.map(e=>{
+            data[0].map(e=>{
                 return(
                     <>
+                    {console.log(e.reciepts[0])}
                     <tr>
-                        <td>{e.receipt_number}</td>
-                        <td>{e.payment_for}</td>
-                        <td>{e.number}</td>
-                        <td>{e.amount_to_be_paid}</td>
-                        <td>{e.amount_in_words}</td>
-                        {/* <td><Pay con={e}/></td> */}
+                        <td>{e.reciepts[0].receipt_number}</td>
+                        <td>{e.reciepts[0].payment_for}</td>
+                        <td>{e.reciepts[0].number}</td>
+                        <td>{e.reciepts[0].amount_to_be_paid}</td>
+                        <td>{e.reciepts[0].amount_in_words}</td>
                     </tr>
                     </>
                 );
