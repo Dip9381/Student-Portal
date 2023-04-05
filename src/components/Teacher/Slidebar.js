@@ -65,9 +65,9 @@ document.getElementById('profile').style.display="block";
   return (
     <>
     <div className="slider">
-      <div className="content Profile"><button onClick={showprofile}>Profile</button></div>
+      {/* <div className="content Profile"><button onClick={showprofile}>Profile</button></div> */}
       <div className="content Marks"><button onClick={showmarks}>Marks</button></div>
-      <div className="content Attendance"><button onClick={showattendance}>Attendance</button></div>
+      {/* <div className="content Attendance"><button onClick={showattendance}>Attendance</button></div> */}
       <div className="content LeaveRequest"><button onClick={showleave}>Leave Request</button></div>
       <div className="content"><button onClick={changepass}>Change Password</button></div>
     </div>

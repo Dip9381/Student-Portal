@@ -5,28 +5,33 @@ import './leavecss.css'
 
 const Leave = () => {
     const [user,setuser]=useState("");
+    const [leave,setleave]=useState([]);
   useEffect(()=>{
-    setuser((df)=>{
-      df="";
-      df=localStorage.getItem("teacherid");
-      // console.log(df);
-      return df;
-    })
+    if(user.length===0){
+      setuser((df)=>{
+        df="";
+        df=localStorage.getItem("teacherid");
+        // console.log(df);
+        return df;
+      })
+    }
   })
-  const [leave,setleave]=useState([]);
+  // const [count,setcount]=useState(0);
     useEffect(()=>{
-        axios.get("http://localhost:4001/getproctee",{params:{user}})
+        // if(count<=100){
+          axios.get("http://localhost:4001/getproctee",{params:{user}})
         .then(result=>{
             // console.log(result.data)
             setleave(df=>{
               df=[];
               return [...df,result.data];
             })
+            // setcount(count=>count+1);
          
         }).catch(err=>{
           console.log(err);
         });
-    })
+        })
   return (
     <div id="leave_request">
       {/* <form>
@@ -39,7 +44,6 @@ const Leave = () => {
       <tbody>
         <tr>
           <th>Regno</th>
-          <th>Name</th>
           <th>Start Date</th>
           <th>End Date</th>
           <th>Reason</th>

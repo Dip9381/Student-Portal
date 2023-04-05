@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Userdata from './userdata.js'
 import axios from "../axios";
+import './style.css'
 
 const Attendance = () => {
     const [user,setuser]=useState("");

@@ -10,11 +10,8 @@ const Body = () => {
   return (
     <div id="body">
        <Default/>
-      {/*<Profile /> */}
       <Marks/>
        <Leave />
-      {/*<Attendance />
-      <Payment/>*/}
       <Changepass/> 
     </div>
   );

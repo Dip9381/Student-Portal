@@ -64,7 +64,7 @@ const Payment = () => {
                 <th>Payment Number</th>
                 <th>Payment Details</th>
                 <th>Reciept id</th>
-                <th>Amount to be paid</th>
+                <th>Amount paid</th>
                 <th>Amount in words</th>
                 </tr>
                     <RecieptData data={receiptdata}/>

@@ -18,8 +18,8 @@ const Loginauthen = () => {
   }
 
   async function submit(e) {
-    localStorage.setItem("teacherauth","false");
     e.preventDefault();
+    localStorage.setItem("teacherauth","false");
     await axios({
         method: 'post',
         url: 'http://localhost:4001/teachergetauthenticate',

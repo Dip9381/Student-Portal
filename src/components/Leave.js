@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 const Leave = () => {
     const [leave_detail,setleave_detail]=useState({
         reg_no:"",
-        Name:"",
         start_date:"",
         end_date:"",
         reason:"",
@@ -25,14 +24,14 @@ const Leave = () => {
       const change=(e)=>{
         // setleave_detail({...leave_detail,);
         // setleave_detail({...leave_detail,});
-        setleave_detail({...leave_detail,[e.target.name]:e.target.value,reg_no:document.getElementById('sregno').innerText,Name:document.getElementById('sname').innerText});
+        setleave_detail({...leave_detail,[e.target.name]:e.target.value,reg_no:document.getElementById('sregno').innerText});
         // console.log(typeof e.target.value);
       }
   return (
     <div id="leave_request">
     <form onSubmit={handleevent}>
-      <div id="sname">Dipansu Rout</div><br />
-      <div id="sregno">20bps1142</div><br />
+      {/* <div id="sname">Dipansu Rout</div><br /> */}
+      <div id="sregno">{localStorage.getItem("regno")}</div><br />
       <span>From :<input type="date" name="start_date" onChange={change} required/></span>&nbsp;&nbsp;<span>To :<input type="date" name="end_date" onChange={change} required/></span><br /><br />
       <select name="reason" id="reason" onChange={change} required>
         <option value="">----Choose Your Reason----</option>

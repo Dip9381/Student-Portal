@@ -266,6 +266,10 @@ body{
 #attendance{
   display: none;
   width: 100%;
+  margin-top: 6%;
+}
+#attendance th{
+  box-shadow: inset 40px 40px 80px -30px rgb(179, 177, 177);
 }
 #block{
   width: 100%;

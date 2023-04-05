@@ -1,14 +1,14 @@
 #default{
     display: flex;
-    height: 450px;
+    height: 500px;
 }
 .card{
     border: 1px black solid;
     width: 23%;
     /* height: 10%; */
-    margin-left: 3%;
-    margin-right: 3%;
-    margin-top: 5%;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 8%;
     border-radius: 10px;
     box-shadow: inset rgb(144, 144, 240) 100px 100px 200px -40px;
     padding: 10px;
@@ -17,35 +17,27 @@
 }
 .thiscard{
     transform-style: preserve-3d;
-    transition: all 0.5s ease;
-    position: absolute;
+    position: relative;
     width: 100%;
     height: 100%;;
     border-radius: 10px;
+    transition: transform 1.5s;
 }
-.thiscard:hover{
+.card:hover > .thiscard{
     transform: rotatey(180deg);
 }
-.front{
+.front,.back{
     backface-visibility: hidden;
     position: absolute;
-    background-color: rgb(120, 125, 66);
     width: 100%;
-    height: 100%;;
+    height: 100%;
+}
+.front{
+    box-shadow: inset rgb(144, 144, 240) 100px 100px 200px -40px;
     border-radius: 10px;
 }
 .back{
-    backface-visibility: hidden;
-    position: absolute;
-    background-color: rgb(240, 235, 235);
-    width: 100%;
-    height: 100%;
+    box-shadow: inset rgb(198, 198, 255) 100px 100px 200px -40px;
     border-radius: 10px;
-}
-.card:hover{
-    /* transform: rotate(y 360deg); */
-    rotate: y 180deg;
-}
-.liststyle{
-    list-style:none;
+    transform: rotatey(180deg);
 }

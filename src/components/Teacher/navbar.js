@@ -53,8 +53,8 @@ async function logout(e){
         <a className="navele" href="" onClick={showdefault}>
           <img src={home} width={"40px"} alt="" /> Home
         </a>
+        <span style={{color:"white",paddingLeft:"300px",fontSize:"50px"}}>Karasuno <span style={{fontSize:"30px"}}>High school</span></span>
         </div>
-        <a className="navele" href="https://www.google.com/">Contact us</a>
         <div className="dashboard">
           <div className="dropdown">
             <div className="dropdown-toggle" onClick={toggleDropdown}>

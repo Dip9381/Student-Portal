@@ -43,26 +43,29 @@ app.use(express.json());
   let proctee=require("./proctees")
   app.use("/",router);
   app.get('/getproctee',(req,res)=>{
-    // console.log(req.query)
+    // console.log(req.query);
     proctee.find({teacher_id:req.query.user})
     .then((result)=>{
-      // res.send(result);
+      let dat=[];
+      // console.log(result);
       typeof result[0]!=="undefined"?
-      result[0].proctee.map(e=>{
-        // console.log(e.id);
-        let id=e.id;
-        leave_info.find({reg_no:id})
-        .then((result)=>{
-          // console.log(result.length)
-          result.length!==0?
-          // console.log(result.length)
-          res.send(result)
-          :(a=10);
+      (
+        Promise.all(
+        result[0].proctee.map(e=>{
+          let id=e.id;
+          return leave_info.find({reg_no:id})
         })
-      })
-      :console.log
-      ("")
-      
+      )
+      .then((results)=>{
+          // if(result.length!==0)
+        results.forEach((result)=>{
+        dat.push(result);
+        })
+        // console.log(dat);
+        res.send(dat);
+      })   
+        )
+      :console.log("")
     })
     .catch(err=>{
       console.log(err);
@@ -78,7 +81,6 @@ app.use(express.json());
   console.log(req.body);
     const data=new leave_info({
       reg_no:req.body.reg_no,
-      Name:req.body.Name,
       start_date:req.body.start_date,
       end_date:req.body.end_date,
       reason:req.body.reason,
